@@ -22,5 +22,15 @@ export const ActionButton = styled.button`
     ${props.pot ? `background-color: lightskyblue;` : ``}
     ${props.nine ? `background-color: limegreen;` : ``}
 
+    ${
+      props.small
+        ? `
+        font-size: 18px;
+        height: 50px;
+        width: 80px;
+      `
+        : ``
+    }
+
     `}
 `;

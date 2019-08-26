@@ -2,20 +2,24 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 import { ActionButton } from "./ActionButton";
+import { Player } from "./Player";
 
 const PlayerHolder = styled.div`
   display: flex;
-  max-width: 1080px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: auto;
+  max-width: 800px;
   margin-top: 20px;
   margin-bottom: 20px;
 `;
 
-const Player = styled.div`
+const PlayerUI = styled.div`
   display: flex;
   flex-direction: column;
   font-size: 18px;
   font-weight: 500;
-  margin: auto;
+  margin: 8px;
   justify-content: center;
   border: solid 1px black;
   border-radius: 8px;
@@ -53,9 +57,7 @@ const playerRostom = ["Adriana", "Alex", "Marcus", "Peter", "Petra"];
 export const PlayerSelect = props => {
   const { callback } = props;
 
-  const [players, setPlayers] = useState(
-    playerRostom.map(p => ({ name: p, score: 0, selected: false }))
-  );
+  const [players, setPlayers] = useState(playerRostom.map(p => new Player(p)));
   const [playerName, setPlayerName] = useState("");
 
   const togglePlayer = p => {
@@ -94,13 +96,13 @@ export const PlayerSelect = props => {
 
       <PlayerHolder>
         {players.map(p => (
-          <Player
+          <PlayerUI
             onClick={() => togglePlayer(p)}
             key={p.name}
             selected={p.selected}
           >
             {p.name}
-          </Player>
+          </PlayerUI>
         ))}
       </PlayerHolder>
 

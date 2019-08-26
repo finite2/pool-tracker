@@ -31,8 +31,31 @@ const ScoreDiv = styled.div`
       : ``};
 `;
 
+const textScore = score => {
+  if (score < 0) {
+    return [
+      "",
+      "1st",
+      "2nd",
+      "3rd",
+      "4th",
+      "5th",
+      "6th",
+      "7th",
+      "8th",
+      "9th",
+      "10th",
+      "11th",
+      "12th"
+    ][-score];
+  } else if (score === 1) {
+    return `1 life left`;
+  }
+  return `${score} lives left`;
+};
+
 export const ScoreCard = props => {
-  const { players } = props;
+  const { players, killer = false } = props;
 
   if (players && players.length) {
     return (
@@ -48,7 +71,7 @@ export const ScoreCard = props => {
             .map(p => (
               <ScoreDiv score={p.score} key={p.name}>
                 <Cell>{p.name}</Cell>
-                <Cell>{p.score}</Cell>
+                <Cell>{killer ? textScore(p.score) : p.score}</Cell>
               </ScoreDiv>
             ))}
         </>

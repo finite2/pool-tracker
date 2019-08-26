@@ -1,39 +1,16 @@
 import React, { useState } from "react";
-import styled from "styled-components";
 
+import { Vertical } from "./components/Layout";
 import { ActionButton } from "./ActionButton";
 import { ScoreCard } from "./ScoreCard";
+import { WhoseTurnNow, ScoreButtonHolder } from "./components/WhoseTurnNow";
+
+import { shuffle } from "./utils/shuffle";
+import { Player } from "./Player";
 
 const scoreFun = ({ foul, pot, nine }) => pot + !foul * 4.5 * nine - 1.5 * foul;
 
 const random = count => Math.floor(Math.random() * count);
-
-const shuffle = array => {
-  let counter = array.length;
-
-  // While there are elements in the array
-  while (counter > 0) {
-    // Pick a random index
-    let index = Math.floor(Math.random() * counter);
-
-    // Decrease counter by 1
-    counter--;
-
-    // And swap the last element with it
-    let temp = array[counter];
-    array[counter] = array[index];
-    array[index] = temp;
-  }
-
-  return array;
-};
-
-class Player {
-  constructor(name) {
-    this.name = name;
-    this.score = 0;
-  }
-}
 
 class PlayState {
   constructor(players) {
@@ -57,24 +34,8 @@ class PlayState {
   }
 }
 
-const ScoreButtonHolder = styled.div`
-  display: flex;
-  max-width: 80%;
-  margin: auto;
-`;
-
-const WhoseTurnNow = styled.div`
-  margin: auto;
-  margin-top: 10px;
-  font-size: 24px;
-  border: 1px solid black;
-  border-radius: 8px;
-  background-color: yellow;
-  width: 20%;
-  height: 100px;
-`;
-
 const Nineball = props => {
+  const { home } = props;
   const [players, setPlayers] = useState(props.players);
 
   const [turnState, setTurnState] = useState(new PlayState(players));
@@ -156,6 +117,9 @@ const Nineball = props => {
         <ActionButton onClick={newGame} nine={true}>
           New round
         </ActionButton>
+        <ActionButton onClick={home} pot={true}>
+          Home
+        </ActionButton>
       </div>
     );
   }
@@ -210,11 +174,11 @@ const Nineball = props => {
       </div>
       <div>
         <h4>Who is next</h4>
-        <ActionButton onClick={() => setPlayState("foul")}>
+        <ActionButton foul={true}>
           <h4>On Foul</h4>
           <h4>{turnState.previous}</h4>
         </ActionButton>
-        <ActionButton onClick={() => setPlayState("miss")}>
+        <ActionButton miss={true}>
           <h4>On Miss</h4>
           <h4>{turnState.next[0]}</h4>
         </ActionButton>
