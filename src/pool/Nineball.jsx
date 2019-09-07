@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 
-import { Vertical } from "./components/Layout";
 import { ActionButton } from "./ActionButton";
 import { ScoreCard } from "./ScoreCard";
 import { WhoseTurnNow, ScoreButtonHolder } from "./components/WhoseTurnNow";
 
 import { shuffle } from "./utils/shuffle";
-import { Player } from "./Player";
 
 const scoreFun = ({ foul, pot, nine }) => pot + !foul * 4.5 * nine - 1.5 * foul;
 
@@ -39,12 +37,6 @@ const Nineball = props => {
   const [players, setPlayers] = useState(props.players);
 
   const [turnState, setTurnState] = useState(new PlayState(players));
-
-  const addPlayer = name => {
-    let curPlayers = [...players];
-    curPlayers.push(new Player(name));
-    setPlayers(curPlayers);
-  };
 
   const setPlayState = action => {
     let thisState = { ...turnState };

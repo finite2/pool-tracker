@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import styled from "styled-components";
 
 import { Vertical } from "./components/Layout";
 import { ActionButton } from "./ActionButton";
@@ -8,7 +7,7 @@ import Nineball from "./Nineball";
 import Killer from "./Killer";
 import { PlayerSelect } from "./PlayerSelect";
 
-const Home = props => {
+const Home = () => {
   const [mode, setMode] = useState("");
   const [players, setPlayers] = useState([]);
 

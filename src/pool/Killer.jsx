@@ -4,7 +4,6 @@ import { Vertical } from "./components/Layout";
 import { ActionButton } from "./ActionButton";
 import { WhoseTurnNow, ScoreButtonHolder } from "./components/WhoseTurnNow";
 import { ScoreCard } from "./ScoreCard";
-import { Player } from "./Player";
 
 import { shuffle } from "./utils/shuffle";
 
