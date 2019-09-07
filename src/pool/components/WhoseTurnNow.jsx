@@ -8,11 +8,14 @@ export const WhoseTurnNow = styled.div`
   border-radius: 8px;
   background-color: yellow;
   width: 20%;
+  min-width: 200px;
   height: 100px;
 `;
 
 export const ScoreButtonHolder = styled.div`
   display: flex;
-  max-width: 80%;
+  max-width: 90%;
   margin: auto;
+  align-items: center;
+  justify-content: center;
 `;

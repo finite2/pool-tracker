@@ -101,6 +101,8 @@ const Nineball = props => {
 
         setPlayers(thisPlayers);
       }
+    } else if (action === "new-round") {
+      thisState.gameOver = true;
     }
 
     setTurnState(thisState);
@@ -114,12 +116,14 @@ const Nineball = props => {
     return (
       <div>
         <ScoreCard players={players} />
-        <ActionButton onClick={newGame} nine={true}>
-          New round
-        </ActionButton>
-        <ActionButton onClick={home} pot={true}>
-          Home
-        </ActionButton>
+        <ScoreButtonHolder>
+          <ActionButton onClick={newGame} nine={true}>
+            New round
+          </ActionButton>
+          <ActionButton onClick={home} pot={true}>
+            Home
+          </ActionButton>
+        </ScoreButtonHolder>
       </div>
     );
   }
@@ -157,26 +161,34 @@ const Nineball = props => {
             Nine
           </ActionButton>
         </ScoreButtonHolder>
-        <ActionButton
-          onClick={() => setPlayState("reset")}
-          foul={
-            turnState.foul || turnState.nine || turnState.miss || turnState.pot
-          }
-        >
-          Reset
-        </ActionButton>
-        <ActionButton
-          onClick={() => setPlayState("submit")}
-          pot={turnState.foul || turnState.nine || turnState.miss}
-        >
-          Submit
-        </ActionButton>
+        <ScoreButtonHolder>
+          <ActionButton
+            onClick={() => setPlayState("reset")}
+            foul={
+              turnState.foul ||
+              turnState.nine ||
+              turnState.miss ||
+              turnState.pot
+            }
+          >
+            Reset
+          </ActionButton>
+          <ActionButton
+            onClick={() => setPlayState("submit")}
+            pot={turnState.foul || turnState.nine || turnState.miss}
+          >
+            Submit
+          </ActionButton>
+          <ActionButton onClick={() => setPlayState("new-round")}>
+            New Round
+          </ActionButton>
+        </ScoreButtonHolder>
       </div>
       <div>
-        <h4>Who is next</h4>
+        <h4>Who's next</h4>
         <ActionButton foul={true}>
           <h4>On Foul</h4>
-          <h4>{turnState.previous}</h4>
+          <h4>{turnState.pot > 0 ? turnState.next : turnState.previous}</h4>
         </ActionButton>
         <ActionButton miss={true}>
           <h4>On Miss</h4>
